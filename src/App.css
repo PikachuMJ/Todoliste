@@ -36,6 +36,7 @@ body {
   flex-grow: 1;
   margin-right: 10px;
   background-color: #ffffff;
+  font-size: 18px;
 }
 
 .calendar-input {
@@ -44,8 +45,8 @@ body {
   border-radius: 4px;
   margin-right: 10px;
   background-color: #ffffff;
+  font-size: 18px;
 }
-
 
 .color-buttons {
   display: flex;
@@ -54,9 +55,9 @@ body {
 }
 
 .color-button {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  border-radius: 100%;
   border: none;
   margin-right: 10px;
   cursor: pointer;
@@ -66,7 +67,8 @@ body {
 .green { background-color: #00ff00; }
 .blue { background-color: #97ffff; }
 .navy { background-color: #001F3F; }
-.purple { background-color: #b23aee}
+.purple { background-color: #b23aee; }
+.white { background-color: #ffffff}
 
 .white:hover,
 .red:hover,
@@ -74,7 +76,7 @@ body {
 .blue:hover,
 .navy:hover,
 .purple:hover {
-transform: scale(1.1);
+  transform: scale(1.1);
 }
 .white:active,
 .red:active,
@@ -82,7 +84,7 @@ transform: scale(1.1);
 .blue:active,
 .navy:active,
 .purple:active {
-transform: scale(1.2);
+  transform: scale(1.2);
 }
 .todo-list {
   list-style-type: none;
@@ -97,11 +99,12 @@ transform: scale(1.2);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 18px;
 }
 
 .calendar-entry {
   margin-left: 10px;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .todo-item span {
@@ -118,6 +121,7 @@ transform: scale(1.2);
   justify-content: center;
   gap: 20px;
 }
+
 .clear-button,
 .delete-button,
 .add-button,
@@ -131,6 +135,7 @@ transform: scale(1.2);
   cursor: pointer;
   transition: transform 0.1s ease;
   margin: 5px;
+  font-size: 18px;
 }
 .add-button:hover,
 .clear-button:hover,
