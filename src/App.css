@@ -118,6 +118,7 @@ transform: scale(1.2);
   justify-content: center;
   gap: 20px;
 }
+.clear-button,
 .delete-button,
 .add-button,
 .save-button,
@@ -132,6 +133,7 @@ transform: scale(1.2);
   margin: 5px;
 }
 .add-button:hover,
+.clear-button:hover,
 .save-button:hover,
 .open-button:hover {
   background-color: #0056b3;
@@ -140,26 +142,8 @@ transform: scale(1.2);
   background-color: #ff0000;
 }
 .add-button:active,
+.clear-button:active,
 .save-button:active,
 .open-button:active {
   transform: scale(1.1);
-}
-
-.open-button.animate {
-  animation: pop 0.5s forwards;
-}
-
-@keyframes pop {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
 }
