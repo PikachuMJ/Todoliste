@@ -90,7 +90,7 @@ const TodoList = () => {
                     Clear All
                 </animated.button>
                 <animated.button className="save-button" onClick={saveTodos}>
-                    Save As
+                    Save
                 </animated.button>
                 <animated.label htmlFor="file-input" className="open-button">
                     Open
