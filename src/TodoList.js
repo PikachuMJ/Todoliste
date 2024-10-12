@@ -78,9 +78,17 @@ const TodoList = () => {
         }
     };
 
+    const clearTodos = () => {
+        setTodos([]);
+        localStorage.removeItem('todos');
+    };
+
     return (
         <div className="todo-container">
             <div className="button-container">
+                <animated.button className="clear-button" onClick={clearTodos}>
+                    Clear All
+                </animated.button>
                 <animated.button className="save-button" onClick={saveTodos}>
                     Save As
                 </animated.button>
@@ -91,7 +99,7 @@ const TodoList = () => {
                     type="file"
                     accept=".json"
                     onChange={handleFileChange}
-                    style={{ display: 'none' }}
+                    style={{display: 'none'}}
                     id="file-input"
                 />
             </div>
@@ -103,7 +111,6 @@ const TodoList = () => {
                     onChange={handleTodoChange}
                     onKeyPress={handleKeyPress}
                     placeholder="Add Todo..."
-                    style={{ color: 'black', fontSize: '18px', height: '40px' }}
                     className="todo-input"
                 />
                 <input
@@ -111,9 +118,8 @@ const TodoList = () => {
                     value={calendarDate}
                     onChange={(e) => setCalendarDate(e.target.value)}
                     className="calendar-input"
-                    style={{ fontSize: '18px', height: '40px' }}
                 />
-                <button className="add-button" onClick={addTodo}>Hinzufügen</button>
+                <button className="add-button" onClick={addTodo}>Add</button>
             </div>
 
             <div className="color-buttons">
@@ -127,7 +133,7 @@ const TodoList = () => {
 
             <ul className="todo-list">
                 {todos.map((todo, index) => (
-                    <li key={index} className="todo-item" style={{ fontSize: '18px' }}>
+                    <li key={index} className="todo-item">
                         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                             {todo.text.map((line, lineIndex) => (
                                 <span key={lineIndex} style={{ display: 'block' }}>
@@ -148,7 +154,7 @@ const TodoList = () => {
                             ))}
                         </div>
                         {todo.calendarDate && (
-                            <span className="calendar-entry" style={{ fontSize: '18px' }}>In Kalender: {todo.calendarDate}</span>
+                            <span className="calendar-entry">In Calendar: {todo.calendarDate}</span>
                         )}
                         <button className="delete-button" onClick={() => deleteTodo(index)}>Delete</button>
                     </li>
