@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSpring, animated } from 'react-spring';
-import Particle from './Particle';
 
 const TodoList = () => {
     const [todos, setTodos] = useState([]);
     const [newTodo, setNewTodo] = useState('');
     const [selectedColor, setSelectedColor] = useState('#000000');
     const [calendarDate, setCalendarDate] = useState('');
-    const [particles, setParticles] = useState([]);
 
     useEffect(() => {
         const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
@@ -53,7 +51,6 @@ const TodoList = () => {
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        triggerParticles();
     };
 
     const handleFileChange = (event) => {
@@ -66,16 +63,6 @@ const TodoList = () => {
             };
             reader.readAsText(file);
         }
-        triggerParticles();
-    };
-
-    const triggerParticles = () => {
-        const radius = 50;
-        const angle = Math.random() * 2 * Math.PI;
-        const distance = Math.random() * radius;
-
-        setParticles([...particles, { distance, angle }]);
-        setTimeout(() => setParticles(particles => particles.filter(p => p.distance !== distance || p.angle !== angle)), 500);
     };
 
     return (
@@ -121,16 +108,6 @@ const TodoList = () => {
                 <button className="color-button blue" onClick={() => setSelectedColor('#007bff')}></button>
                 <button className="color-button navy" onClick={() => setSelectedColor('#001F3F')}></button>
             </div>
-
-            {particles.map((particle, index) => (
-                <Particle
-                    key={index}
-                    distance={particle.distance}
-                    angle={particle.angle}
-                    xOffset={200}
-                    yOffset={50}
-                />
-            ))}
 
             <ul className="todo-list">
                 {todos.map((todo, index) => (
