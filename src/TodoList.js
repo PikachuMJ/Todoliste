@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+// eslint-disable-next-line no-unused-vars
 import { useSpring, animated } from 'react-spring';
 
 const TodoList = () => {
@@ -22,7 +23,8 @@ const TodoList = () => {
             for (let i = 0; i < newTodo.length; i += 40) {
                 lines.push(newTodo.slice(i, i + 40));
             }
-            setTodos([...todos, { text: lines, colors: {}, calendarDate: calendarDate || '' }]);
+            const creationDateTime = new Date().toLocaleString();
+            setTodos([...todos, { text: lines, colors: {}, calendarDate: calendarDate || '', createdAt: creationDateTime }]);
             setNewTodo('');
             setCalendarDate('');
         }
@@ -99,7 +101,7 @@ const TodoList = () => {
                     type="file"
                     accept=".json"
                     onChange={handleFileChange}
-                    style={{display: 'none'}}
+                    style={{ display: 'none' }}
                     id="file-input"
                 />
             </div>
@@ -153,9 +155,12 @@ const TodoList = () => {
                                 </span>
                             ))}
                         </div>
-                        {todo.calendarDate && (
-                            <span className="calendar-entry">In Calendar: {todo.calendarDate}</span>
-                        )}
+                        <div className="todo-dates">
+                            <div>Erstellt: {todo.createdAt}</div>
+                            {todo.calendarDate && (
+                                <div>Bis zum: {todo.calendarDate}</div>
+                            )}
+                        </div>
                         <button className="delete-button" onClick={() => deleteTodo(index)}>Delete</button>
                     </li>
                 ))}
