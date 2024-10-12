@@ -18,27 +18,40 @@ const TodoList = () => {
 
     const addTodo = () => {
         if (newTodo.trim()) {
-            const words = newTodo.split(' ').map(word => ({ text: word, color: selectedColor }));
-            setTodos([...todos, { text: words, color: selectedColor, calendarDate: calendarDate || '' }]);
+            const lines = [];
+            for (let i = 0; i < newTodo.length; i += 40) {
+                lines.push(newTodo.slice(i, i + 40));
+            }
+            setTodos([...todos, { text: lines, colors: {}, calendarDate: calendarDate || '' }]);
             setNewTodo('');
             setCalendarDate('');
         }
     };
 
-    const changeColorForWord = (index, wordIndex) => {
+    const changeColorForWord = (index, word) => {
         const updatedTodos = todos.map((todo, i) => {
             if (i === index) {
-                const updatedWords = [...todo.text];
-                updatedWords[wordIndex].color = selectedColor;
-                return { ...todo, text: updatedWords };
+                const updatedColors = { ...todo.colors, [word]: selectedColor };
+                return { ...todo, colors: updatedColors };
             }
             return todo;
         });
         setTodos(updatedTodos);
     };
 
+    const deleteTodo = (index) => {
+        const updatedTodos = todos.filter((_, i) => i !== index);
+        setTodos(updatedTodos);
+    };
+
     const handleTodoChange = (event) => {
         setNewTodo(event.target.value);
+    };
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            addTodo();
+        }
     };
 
     const saveTodos = () => {
@@ -88,8 +101,9 @@ const TodoList = () => {
                     type="text"
                     value={newTodo}
                     onChange={handleTodoChange}
+                    onKeyPress={handleKeyPress}
                     placeholder="Add Todo..."
-                    style={{ color: selectedColor }}
+                    style={{ color: 'black', fontSize: '18px', height: '40px' }}
                     className="todo-input"
                 />
                 <input
@@ -97,33 +111,46 @@ const TodoList = () => {
                     value={calendarDate}
                     onChange={(e) => setCalendarDate(e.target.value)}
                     className="calendar-input"
-                    placeholder="Kalenderdatum"
+                    style={{ fontSize: '18px', height: '40px' }}
                 />
                 <button className="add-button" onClick={addTodo}>Hinzufügen</button>
             </div>
 
             <div className="color-buttons">
-                <button className="color-button red" onClick={() => setSelectedColor('red')}></button>
-                <button className="color-button green" onClick={() => setSelectedColor('green')}></button>
-                <button className="color-button blue" onClick={() => setSelectedColor('#007bff')}></button>
+                <button className="color-button white" onClick={() => setSelectedColor('#ffffff')}></button>
+                <button className="color-button red" onClick={() => setSelectedColor('#ff0000')}></button>
+                <button className="color-button green" onClick={() => setSelectedColor('#00ff00')}></button>
+                <button className="color-button blue" onClick={() => setSelectedColor('#97ffff')}></button>
                 <button className="color-button navy" onClick={() => setSelectedColor('#001F3F')}></button>
+                <button className="color-button purple" onClick={() => setSelectedColor('#b23aee')}></button>
             </div>
 
             <ul className="todo-list">
                 {todos.map((todo, index) => (
-                    <li key={index} className="todo-item">
-                        {todo.text.map((wordObj, wordIndex) => (
-                            <span
-                                key={wordIndex}
-                                style={{ color: wordObj.color }}
-                                onClick={() => changeColorForWord(index, wordIndex)}
-                            >
-                                {wordObj.text}{' '}
-                            </span>
-                        ))}
+                    <li key={index} className="todo-item" style={{ fontSize: '18px' }}>
+                        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                            {todo.text.map((line, lineIndex) => (
+                                <span key={lineIndex} style={{ display: 'block' }}>
+                                    {line.split(' ').map((word, wordIndex) => (
+                                        <span
+                                            key={wordIndex}
+                                            onClick={() => changeColorForWord(index, word)}
+                                            style={{
+                                                color: todo.colors[word] || 'inherit',
+                                                cursor: 'pointer',
+                                                marginRight: '4px',
+                                            }}
+                                        >
+                                            {word}
+                                        </span>
+                                    ))}
+                                </span>
+                            ))}
+                        </div>
                         {todo.calendarDate && (
-                            <span className="calendar-entry">In Kalender: {todo.calendarDate}</span>
+                            <span className="calendar-entry" style={{ fontSize: '18px' }}>In Kalender: {todo.calendarDate}</span>
                         )}
+                        <button className="delete-button" onClick={() => deleteTodo(index)}>Delete</button>
                     </li>
                 ))}
             </ul>

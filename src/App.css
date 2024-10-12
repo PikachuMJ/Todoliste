@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #001F3F;
+  background-color: #2a2a72;
   color: #ffffff;
   margin: 0;
   padding: 0;
@@ -13,9 +13,8 @@ body {
 .App {
   text-align: center;
   max-width: 600px;
-  width: 100%;
   padding: 20px;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
   background-color: #003366;
   border-radius: 8px;
 }
@@ -25,9 +24,9 @@ body {
 }
 
 .input-section {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
 }
 
 .todo-input {
@@ -47,18 +46,6 @@ body {
   background-color: #ffffff;
 }
 
-.add-button {
-  background-color: #004080;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.add-button:hover {
-  background-color: #003366;
-}
 
 .color-buttons {
   display: flex;
@@ -75,11 +62,28 @@ body {
   cursor: pointer;
 }
 
-.red { background-color: red; }
-.green { background-color: green; }
-.blue { background-color: #007bff; }
+.red { background-color: #ff0000; }
+.green { background-color: #00ff00; }
+.blue { background-color: #97ffff; }
 .navy { background-color: #001F3F; }
+.purple { background-color: #b23aee}
 
+.white:hover,
+.red:hover,
+.green:hover,
+.blue:hover,
+.navy:hover,
+.purple:hover {
+transform: scale(1.1);
+}
+.white:active,
+.red:active,
+.green:active,
+.blue:active,
+.navy:active,
+.purple:active {
+transform: scale(1.2);
+}
 .todo-list {
   list-style-type: none;
   padding: 0;
@@ -101,6 +105,7 @@ body {
 }
 
 .todo-item span {
+  display: inline-flex;
   cursor: pointer;
 }
 
@@ -113,7 +118,8 @@ body {
   justify-content: center;
   gap: 20px;
 }
-
+.delete-button,
+.add-button,
 .save-button,
 .open-button {
   background-color: #007bff;
@@ -123,14 +129,17 @@ body {
   border-radius: 4px;
   cursor: pointer;
   transition: transform 0.1s ease;
-  margin: 10px;
+  margin: 5px;
 }
-
+.add-button:hover,
 .save-button:hover,
 .open-button:hover {
   background-color: #0056b3;
 }
-
+.delete-button:hover {
+  background-color: #ff0000;
+}
+.add-button:active,
 .save-button:active,
 .open-button:active {
   transform: scale(1.1);
